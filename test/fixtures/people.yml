@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  Last: MyString
+  First: MyString
+  Pin: MyString
+  Longitude: MyString
+  Latitude: MyString
+  Address: MyString
+  City: MyString
+  Region: MyString
+  State: MyString
+  Zip: MyString
+  Country: MyString
+
+two:
+  Last: MyString
+  First: MyString
+  Pin: MyString
+  Longitude: MyString
+  Latitude: MyString
+  Address: MyString
+  City: MyString
+  Region: MyString
+  State: MyString
+  Zip: MyString
+  Country: MyString

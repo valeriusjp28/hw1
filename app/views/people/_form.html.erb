@@ -1,0 +1,197 @@
+<%= stylesheet_link_tag  "random" %>
+<%= javascript_include_tag 'jquery', 'test' %>
+
+
+
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :Last %><br />
+    <%= f.text_field :Last %>
+  </div>
+  <div class="field">
+    <%= f.label :First %><br />
+    <%= f.text_field :First %>
+  </div>
+  <div class ="field" align="left" id="radiobuttons"><br>
+
+
+        How would you like to be located? <br>
+        <input type="radio" name="group1" id="longlat" value="1"> Longitude & Latitude<br>
+        <input type="radio" name="group1" id="saddress" value="2" > Street Address<br>
+        <input type="radio" name="group1" id="citystate" value="3"> Zip Code<br>
+        <input type="radio" name="group1" id="ip" value="4"> IP Address<br><br>
+
+
+  </div>
+  <div class="field">
+    <%= f.label :Pin %><br />
+    <%= f.text_field :Pin %>
+  </div>
+  <div class="field" id="long">
+    <%= f.label :Longitude %><br />
+    <%= f.text_field :Longitude %>
+    Must be between -180 and 80
+  </div>
+  <div class="field" id="lat">
+    <%= f.label :Latitude %><br />
+    <%= f.text_field :Latitude %>
+    Must be between -90 and 90
+  </div>
+  <div class="field" id="address">
+    <%= f.label :Address %><br />
+    <%= f.text_field :Address %>
+  </div>
+  <div class="field" id="city">
+    <%= f.label :City %><br />
+    <%= f.text_field :City %>
+  </div>
+  <div class="field" id="region">
+    <%= f.label :Region %><br />
+    <%= f.text_field :Region %>
+  </div>
+  <div class="field" id="state">
+    <%= f.label :State %><br />
+    <%= f.text_field :State %>
+  </div>
+  <div class="field" id="zip">
+    <%= f.label :Zip %><br />
+    <%= f.text_field :Zip %>
+  </div>
+  <div class="field" id="country">
+    <%= f.label :Country %><br />
+    <%= f.text_field :Country %>
+  </div>
+  <div class="actions" id="submit">
+    Code is correct, please click "Create Person" <br />
+    <%= f.submit %>
+  </div>
+
+<BR><BR>
+
+<p id="randomnumber">
+    <% @random_number = rand(9999) + 10000
+        session[:random_num] = @random_n1
+        @string_random = @random_number.to_s
+        i=0
+
+        %>
+
+        <script>
+          var random_num = "<%= @string_random %>"
+        </script>
+
+        <%
+        loop do
+            i+=1
+            @random_n1 = rand(10)
+            @dig = @string_random[i-1]
+            break if i==6
+
+            @class = "s1"
+
+            if @random_n1 >= 2
+                @class = "s2"
+            end
+
+            if @random_n1 >= 5
+                @class = "s3"
+            end
+
+            if @random_n1 >= 7
+                @class = "s4"
+            end
+            %>
+            <span class='<%= @class %>'> <%= @dig %> </span>
+        <% end %>
+    <br>
+
+</p>
+<div id="sec_question">
+
+<input type="textbox" name="group1" id="sec_code" value="">
+    <a id="code">Check</a>
+    <br>Enter the security number above and click "Check"<br>
+</div>
+<script>
+  $("#long").hide()
+  $("#lat").hide()
+  $("#address").hide()
+  $("#city").hide()
+  $("#state").hide()
+  $("#zip").hide()
+  $("#country").hide()
+  $("#region").hide()
+
+  //Hiding the submit button until the number entered is correct
+  $("#submit").hide()
+  //Check number when button is clicked
+  $("#code").click(function() {
+    if ($("#sec_code").val() == random_num) {
+        $("#submit").show();
+        $("#sec_question").hide();
+        $("#randomnumber").hide();
+    }
+    else {
+        alert("The code you entered is incorrect, please try again");
+        window.location.reload() //Loading a new number if the user entered the other one wrong
+    }
+  });
+
+  //Checking to see which radio button has been checked
+  $("#radiobuttons input:radio").click(function() {
+    if ($(this).val() === "1") {
+        $("#long").show();
+        $("#lat").show();
+        $("#address").hide();
+        $("#city").hide();
+        $("#state").hide();
+        $("#zip").hide();
+        $("#country").hide();
+        $("#region").hide();
+    }
+    if ($(this).val() === "2") {
+        $("#long").hide();
+        $("#lat").hide();
+        $("#address").show();
+        $("#city").show();
+        $("#state").show();
+        $("#zip").hide();
+        $("#country").show();
+        $("#region").show();
+    }
+    if ($(this).val() === "3") {
+        $("#long").hide();
+        $("#lat").hide();
+        $("#address").hide();
+        $("#city").hide();
+        $("#state").hide();
+        $("#zip").show();
+        $("#country").show();
+        $("#region").show();
+    }
+    if ($(this).val() === "4") {
+        $("#long").hide();
+        $("#lat").hide();
+        $("#address").hide();
+        $("#city").hide();
+        $("#state").hide();
+        $("#zip").hide();
+        $("#country").hide();
+        $("#region").hide();
+    }
+  });
+</script>
+<%end%>
